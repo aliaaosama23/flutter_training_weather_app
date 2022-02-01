@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
-class LoadingPage extends StatelessWidget {
+class LoadingPage extends StatefulWidget {
   const LoadingPage({Key? key}) : super(key: key);
 
+  @override
+  State<LoadingPage> createState() => _LoadingPageState();
+}
+
+class _LoadingPageState extends State<LoadingPage> {
+  double lat = 0.0;
+  double long = 0.0;
   Future<Position> _determinePosition() async {
     bool serviceEnabled;
     LocationPermission permission;
@@ -29,17 +36,31 @@ class LoadingPage extends StatelessWidget {
     return await Geolocator.getCurrentPosition();
   }
 
+  getLatLong() async {
+    Position userCurrentPosition = await _determinePosition();
+
+    setState(() {
+      lat = userCurrentPosition.latitude;
+      long = userCurrentPosition.longitude;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    getLatLong();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            // get current location
-            _determinePosition();
-          },
-          child: const Text('get location'),
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text('lat is $lat'),
+          Text('long is $long'),
+        ],
       ),
     );
   }
