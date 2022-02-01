@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:weather/models/loaction.dart';
 
 class LoadingPage extends StatefulWidget {
   const LoadingPage({Key? key}) : super(key: key);
@@ -43,6 +44,8 @@ class _LoadingPageState extends State<LoadingPage> {
       lat = userCurrentPosition.latitude;
       long = userCurrentPosition.longitude;
     });
+    Location().latitude = lat;
+    Location().longitude = long;
   }
 
   @override
@@ -58,8 +61,8 @@ class _LoadingPageState extends State<LoadingPage> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('lat is $lat'),
-          Text('long is $long'),
+          Text('lat is ${Location().latitude}'),
+          Text('long is ${Location().longitude}'),
         ],
       ),
     );
