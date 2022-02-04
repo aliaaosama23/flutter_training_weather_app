@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:weather/models/loaction.dart';
+import 'package:weather/screens/location_page.dart';
 
 class LoadingPage extends StatefulWidget {
   const LoadingPage({Key? key}) : super(key: key);
@@ -12,6 +14,8 @@ class LoadingPage extends StatefulWidget {
 class _LoadingPageState extends State<LoadingPage> {
   double lat = 0.0;
   double long = 0.0;
+  var location = Location();
+
   Future<Position> _determinePosition() async {
     bool serviceEnabled;
     LocationPermission permission;
@@ -40,12 +44,27 @@ class _LoadingPageState extends State<LoadingPage> {
   getLatLong() async {
     Position userCurrentPosition = await _determinePosition();
 
-    setState(() {
-      lat = userCurrentPosition.latitude;
-      long = userCurrentPosition.longitude;
-    });
-    Location().latitude = lat;
-    Location().longitude = long;
+    location.longitude = userCurrentPosition.longitude;
+    location.latitude = userCurrentPosition.latitude;
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => LocationPage(
+          location: location,
+        ),
+      ),
+    );
+
+    // print('lat is ${userCurrentPosition.latitude}');
+    // print('long is ${userCurrentPosition.longitude}');
+    // setState(() {
+    //   lat = userCurrentPosition.latitude;
+    //   long = userCurrentPosition.longitude;
+    // });
+
+    // Location().latitude = lat;
+    // Location().longitude = long;
   }
 
   @override
@@ -57,14 +76,19 @@ class _LoadingPageState extends State<LoadingPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text('lat is ${Location().latitude}'),
-          Text('long is ${Location().longitude}'),
-        ],
-      ),
-    );
+    return const Scaffold(
+        backgroundColor: Colors.blue,
+        body: SpinKitCircle(
+          size: 50,
+          color: Colors.deepPurpleAccent,
+        ));
   }
 }
+
+// Column(
+//   mainAxisAlignment: MainAxisAlignment.center,
+//   children: [
+//     Text('lat is ${location.latitude}'),
+//     Text('long is ${location.longitude}'),
+//   ],
+// ),
