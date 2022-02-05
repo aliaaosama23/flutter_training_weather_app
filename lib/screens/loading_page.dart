@@ -16,79 +16,34 @@ class _LoadingPageState extends State<LoadingPage> {
   double long = 0.0;
   var location = Location();
 
-  Future<Position> _determinePosition() async {
-    bool serviceEnabled;
-    LocationPermission permission;
-
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      return Future.error('Location services are disabled.');
-    }
-
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        return Future.error('Location permissions are denied');
-      }
-    }
-
-    if (permission == LocationPermission.deniedForever) {
-      return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
-    }
-
-    return await Geolocator.getCurrentPosition();
+  @override
+  void initState() {
+    super.initState();
+    getLocation();
   }
 
-  getLatLong() async {
-    Position userCurrentPosition = await _determinePosition();
-
-    location.longitude = userCurrentPosition.longitude;
-    location.latitude = userCurrentPosition.latitude;
+  getLocation() async {
+    await location.getLatLong();
 
     Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => LocationPage(
-          location: location,
+          latitude: location.latitude,
+          longitude: location.longitude,
         ),
       ),
     );
-
-    // print('lat is ${userCurrentPosition.latitude}');
-    // print('long is ${userCurrentPosition.longitude}');
-    // setState(() {
-    //   lat = userCurrentPosition.latitude;
-    //   long = userCurrentPosition.longitude;
-    // });
-
-    // Location().latitude = lat;
-    // Location().longitude = long;
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    getLatLong();
   }
 
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-        backgroundColor: Colors.blue,
-        body: SpinKitCircle(
-          size: 50,
-          color: Colors.deepPurpleAccent,
-        ));
+      backgroundColor: Colors.black26,
+      body: SpinKitCircle(
+        size: 50,
+        color: Colors.deepPurpleAccent,
+      ),
+    );
   }
 }
-
-// Column(
-//   mainAxisAlignment: MainAxisAlignment.center,
-//   children: [
-//     Text('lat is ${location.latitude}'),
-//     Text('long is ${location.longitude}'),
-//   ],
-// ),

@@ -8,20 +8,22 @@ import 'package:weather/models/loaction.dart';
 class LocationPage extends StatelessWidget {
   const LocationPage({
     Key? key,
-    required this.location,
+    required this.latitude,
+    required this.longitude,
   }) : super(key: key);
 
-  final Location location;
+  final double latitude;
+  final double longitude;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('images/location_background.jpg'),
+            image: const AssetImage('images/location_background.jpg'),
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
-              Colors.black,
+              Colors.white.withOpacity(0.8),
               BlendMode.dstATop,
             ),
           ),
@@ -36,7 +38,9 @@ class LocationPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        print('get current location');
+                      },
                       icon: const Icon(
                         Icons.near_me,
                         size: 30,
@@ -44,7 +48,9 @@ class LocationPage extends StatelessWidget {
                       ),
                     ),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        print('choose city to get its location');
+                      },
                       icon: const Icon(
                         Icons.location_city,
                         size: 30,
@@ -83,7 +89,7 @@ class LocationPage extends StatelessWidget {
                       },
                       child: const FaIcon(
                         FontAwesomeIcons.cloud,
-                        size: 60,
+                        size: 80,
                       ),
                     ),
                   ],
@@ -91,7 +97,7 @@ class LocationPage extends StatelessWidget {
                 const Text(
                   'Bring your jacket in case in Mountain View',
                   style: TextStyle(
-                    fontSize: 40,
+                    fontSize: 50,
                     color: Colors.white,
                   ),
                   textAlign: TextAlign.center,
