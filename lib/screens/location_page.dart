@@ -111,3 +111,7 @@ class LocationPage extends StatelessWidget {
     );
   }
 }
+
+// String cityName = decodedData['name'];
+// double temp = decodedData['main']['temp'];
+// int condition = decodedData['weather'][0]['id'];
