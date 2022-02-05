@@ -8,12 +8,12 @@ import 'package:weather/models/loaction.dart';
 class LocationPage extends StatelessWidget {
   const LocationPage({
     Key? key,
-    required this.latitude,
-    required this.longitude,
+    required this.cityName,
+    required this.temperature,
   }) : super(key: key);
 
-  final double latitude;
-  final double longitude;
+  final String cityName;
+  final double temperature;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,14 +23,14 @@ class LocationPage extends StatelessWidget {
             image: const AssetImage('images/location_background.jpg'),
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
-              Colors.white.withOpacity(0.8),
+              Colors.black.withOpacity(0.8),
               BlendMode.dstATop,
             ),
           ),
         ),
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(0.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -61,11 +61,12 @@ class LocationPage extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    const Text(
-                      '12',
-                      style: TextStyle(
+                    Text(
+                      temperature.toStringAsFixed(1),
+                      style: const TextStyle(
                         fontSize: 80,
                         color: Colors.white,
+                        letterSpacing: 0.9,
                       ),
                     ),
                     const Text(
@@ -94,9 +95,9 @@ class LocationPage extends StatelessWidget {
                     ),
                   ],
                 ),
-                const Text(
-                  'Bring your jacket in case in Mountain View',
-                  style: TextStyle(
+                Text(
+                  'Bring your jacket in case in $cityName',
+                  style: const TextStyle(
                     fontSize: 50,
                     color: Colors.white,
                   ),
