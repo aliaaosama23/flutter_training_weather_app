@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather/screens/loading_page.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(const MyApp());
 
 // bundle id: com.flutter.weather.app
 class MyApp extends StatelessWidget {
