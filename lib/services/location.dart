@@ -10,6 +10,7 @@ class Location {
       // set location (lat & long) to location properties
       longitude = userCurrentPosition.longitude;
       latitude = userCurrentPosition.latitude;
+      print('loaction is $latitude -$longitude');
     } catch (e) {
       print('get location error');
     }

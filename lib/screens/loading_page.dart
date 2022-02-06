@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:weather/screens/location_page.dart';
 import 'package:weather/services/location.dart';
-import 'package:weather/utilities/constants.dart';
-import './../services/weather.dart';
+import 'package:weather/services/weather.dart';
 
 class LoadingPage extends StatefulWidget {
   const LoadingPage({Key? key}) : super(key: key);
@@ -15,27 +14,27 @@ class LoadingPage extends StatefulWidget {
 class _LoadingPageState extends State<LoadingPage> {
   @override
   void initState() {
+    print('calling init');
     super.initState();
-    getLocation();
+    getWeatherData();
   }
 
-  void getLocation() async {
+  void getWeatherData() async {
     Location userLocation = Location();
     await userLocation.getLatLong();
-    await getLocationData(userLocation);
+
+    Weather weather = Weather();
+    var weatherData = await weather.getWeatherData(userLocation);
+    navigateToWeatherPage(weatherData);
   }
 
-  getLocationData(Location location) async {
-    NetworkHelper helper = NetworkHelper(
-        'http://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&'
-        'lon=${location.latitude}&appid=$kAPIKEY&units=metric');
-
-    var weatherData = await helper.getData();
-
+  navigateToWeatherPage(weatherData) async {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => LocationPage(weatherData: weatherData),
+        builder: (context) => LocationPage(
+          weatherData: weatherData,
+        ),
       ),
     );
   }

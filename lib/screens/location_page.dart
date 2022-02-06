@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:weather/screens/city_page.dart';
 
 // Celsius \u2103
 // Fahrenheit \u2109
@@ -19,6 +20,27 @@ class LocationPage extends StatefulWidget {
 }
 
 class _LocationPageState extends State<LocationPage> {
+  late double temp = 0;
+  late String cityName = '';
+  @override
+  void initState() {
+    super.initState();
+    updateUI(widget.weatherData);
+  }
+
+  updateUI(weatherData) {
+    setState(() {
+      if (weatherData == null) {
+        temp = 0;
+        cityName = '';
+        return;
+      } else {
+        temp = weatherData['main']['temp'];
+        cityName = widget.weatherData['name'];
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +73,14 @@ class _LocationPageState extends State<LocationPage> {
                       ),
                     ),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const CityPage(),
+                          ),
+                        );
+                      },
                       icon: const Icon(
                         Icons.location_city,
                         size: 30,
@@ -63,7 +92,7 @@ class _LocationPageState extends State<LocationPage> {
                 Row(
                   children: [
                     Text(
-                      widget.weatherData['main']['temp'].toStringAsFixed(1),
+                      temp.toStringAsFixed(1),
                       // temperature.toStringAsFixed(1),
                       style: const TextStyle(
                         fontSize: 80,
@@ -98,10 +127,11 @@ class _LocationPageState extends State<LocationPage> {
                   ],
                 ),
                 Text(
-                  'Bring your jacket in case in ${widget.weatherData['name']}',
+                  'Bring your jacket in case in $cityName',
                   style: const TextStyle(
-                    fontSize: 50,
+                    fontSize: 55,
                     color: Colors.white,
+                    fontWeight: FontWeight.bold,
                   ),
                   textAlign: TextAlign.center,
                 )
