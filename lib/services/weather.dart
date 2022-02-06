@@ -3,8 +3,6 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import 'package:weather/utilities/constants.dart';
-
 class NetworkHelper {
   final String url;
 

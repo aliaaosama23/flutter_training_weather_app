@@ -1,19 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:weather/models/loaction.dart';
 
 // Celsius \u2103
 // Fahrenheit \u2109
-class LocationPage extends StatelessWidget {
+class LocationPage extends StatefulWidget {
   const LocationPage({
     Key? key,
-    required this.cityName,
-    required this.temperature,
+    required this.weatherData,
+    // required this.cityName,
+    // required this.temperature,
   }) : super(key: key);
 
-  final String cityName;
-  final double temperature;
+  final Map<dynamic, dynamic> weatherData;
+
+  @override
+  State<LocationPage> createState() => _LocationPageState();
+}
+
+class _LocationPageState extends State<LocationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,9 +43,7 @@ class LocationPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
-                      onPressed: () {
-                        print('get current location');
-                      },
+                      onPressed: () {},
                       icon: const Icon(
                         Icons.near_me,
                         size: 30,
@@ -48,9 +51,7 @@ class LocationPage extends StatelessWidget {
                       ),
                     ),
                     IconButton(
-                      onPressed: () {
-                        print('choose city to get its location');
-                      },
+                      onPressed: () {},
                       icon: const Icon(
                         Icons.location_city,
                         size: 30,
@@ -62,7 +63,8 @@ class LocationPage extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      temperature.toStringAsFixed(1),
+                      widget.weatherData['main']['temp'].toStringAsFixed(1),
+                      // temperature.toStringAsFixed(1),
                       style: const TextStyle(
                         fontSize: 80,
                         color: Colors.white,
@@ -96,7 +98,7 @@ class LocationPage extends StatelessWidget {
                   ],
                 ),
                 Text(
-                  'Bring your jacket in case in $cityName',
+                  'Bring your jacket in case in ${widget.weatherData['name']}',
                   style: const TextStyle(
                     fontSize: 50,
                     color: Colors.white,

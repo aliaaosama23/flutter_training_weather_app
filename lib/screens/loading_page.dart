@@ -28,17 +28,14 @@ class _LoadingPageState extends State<LoadingPage> {
   getLocationData(Location location) async {
     NetworkHelper helper = NetworkHelper(
         'http://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&'
-        'lon=${location.latitude}&appid=$kAPIKEY');
+        'lon=${location.latitude}&appid=$kAPIKEY&units=metric');
 
     var weatherData = await helper.getData();
 
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => LocationPage(
-          cityName: weatherData['name'],
-          temperature: weatherData['main']['temp'] - 273.15,
-        ),
+        builder: (context) => LocationPage(weatherData: weatherData),
       ),
     );
   }
