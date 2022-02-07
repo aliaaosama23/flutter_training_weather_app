@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:weather/models/weather_model.dart';
 import 'package:weather/screens/city_page.dart';
+import 'package:weather/services/weather.dart';
 
 class LocationPage extends StatefulWidget {
   const LocationPage({Key? key, required this.weatherData}) : super(key: key);
@@ -59,7 +60,12 @@ class _LocationPageState extends State<LocationPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () async {
+                        // get current waether depend on current loaction
+                        WeatherService weather = WeatherService();
+                        var weatherData = await weather.getWeatherData();
+                        updateUI(weatherData);
+                      },
                       icon: const Icon(
                         Icons.near_me,
                         size: 30,

@@ -19,11 +19,8 @@ class _LoadingPageState extends State<LoadingPage> {
   }
 
   void getWeatherData() async {
-    Location userLocation = Location();
-    await userLocation.getLatLong();
-
-    Weather weather = Weather();
-    var weatherData = await weather.getWeatherData(userLocation);
+    WeatherService weather = WeatherService();
+    var weatherData = await weather.getWeatherData();
 
     navigateToWeatherPage(weatherData);
   }
