@@ -75,13 +75,14 @@ class _LocationPageState extends State<LocationPage> {
                       ),
                     ),
                     IconButton(
-                      onPressed: () {
-                        Navigator.push(
+                      onPressed: () async {
+                        final city = await Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => const CityPage(),
                           ),
                         );
+                        print('backed city is $city');
                       },
                       icon: const Icon(
                         Icons.location_city,
