@@ -1,3 +1,4 @@
+import 'package:weather/models/weather_model.dart';
 import 'package:weather/utilities/constants.dart';
 import 'networking.dart';
 
@@ -8,9 +9,10 @@ class Weather {
   Future getWeatherData(userLocation) async {
     NetworkHelper helper =
         NetworkHelper('http://api.openweathermap.org/data/2.5/weather?'
-            'lat=${userLocation.latitude}&'
-            'lon=${userLocation.latitude}&appid='
+            'lat=${userLocation.lat}&'
+            'lon=${userLocation.lon}&appid='
             '$kAPIKEY&units=metric');
-    return helper.getData();
+
+    return helper.getWeatherData();
   }
 }

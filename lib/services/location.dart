@@ -1,16 +1,16 @@
 import 'package:geolocator/geolocator.dart';
 
 class Location {
-  double latitude = 0.0;
-  double longitude = 0.0;
+  double lat = 0.0;
+  double lon = 0.0;
 
   Future<void> getLatLong() async {
     try {
       Position userCurrentPosition = await _determinePosition();
       // set location (lat & long) to location properties
-      longitude = userCurrentPosition.longitude;
-      latitude = userCurrentPosition.latitude;
-      print('loaction is $latitude -$longitude');
+      lon = userCurrentPosition.longitude;
+      lat = userCurrentPosition.latitude;
+      print('loaction is $lat -$lon');
     } catch (e) {
       print('get location error');
     }
