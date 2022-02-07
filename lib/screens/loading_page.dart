@@ -19,21 +19,12 @@ class _LoadingPageState extends State<LoadingPage> {
   }
 
   void getWeatherData() async {
-    // create class for location(lat & long)
-    // make object from this class
     Location userLocation = Location();
-
-    // call get location from geolocation package
-    // then set lat and long from returned data to location object
     await userLocation.getLatLong();
 
-    // create weather class for weather data dependent on current location
     Weather weather = Weather();
-    // get weather depend on location object and return with weather data
-    // set this data to weatherData variable
     var weatherData = await weather.getWeatherData(userLocation);
-    print('returned waegter model data $weatherData');
-    // forward these data to the location page to be displayed
+
     navigateToWeatherPage(weatherData);
   }
 

@@ -1,19 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:weather/models/weather_model.dart';
 import 'package:weather/screens/city_page.dart';
 
-// Celsius \u2103
-// Fahrenheit \u2109
 class LocationPage extends StatefulWidget {
-  const LocationPage({
-    Key? key,
-    required this.weatherData,
-    // required this.cityName,
-    // required this.temperature,
-  }) : super(key: key);
+  const LocationPage({Key? key, required this.weatherData}) : super(key: key);
 
-  final Map<dynamic, dynamic> weatherData;
+  final WeatherModel weatherData;
 
   @override
   State<LocationPage> createState() => _LocationPageState();
@@ -28,15 +22,15 @@ class _LocationPageState extends State<LocationPage> {
     updateUI(widget.weatherData);
   }
 
-  updateUI(weatherData) {
+  updateUI(WeatherModel weatherData) {
     setState(() {
       if (weatherData == null) {
         temp = 0;
         cityName = '';
         return;
       } else {
-        temp = weatherData['main']['temp'];
-        cityName = widget.weatherData['name'];
+        temp = weatherData.main.temp;
+        cityName = weatherData.name;
       }
     });
   }
