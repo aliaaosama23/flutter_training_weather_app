@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:weather/screens/location_page.dart';
-import 'package:weather/services/location.dart';
 import 'package:weather/services/weather.dart';
 
 class LoadingPage extends StatefulWidget {

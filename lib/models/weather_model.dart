@@ -1,7 +1,7 @@
 class WeatherModel {
   WeatherModel({
     // //  required this.coord,
-    // required this.weather,
+    required this.weather,
     // required this.base,
     required this.main,
     // required this.visibility,
@@ -16,7 +16,7 @@ class WeatherModel {
   });
 
   // Coord coord;
-  // List<Weather> weather;
+  List<Weather> weather;
   // String base;
   Main main;
   // int visibility;
@@ -31,8 +31,8 @@ class WeatherModel {
 
   factory WeatherModel.fromJson(Map<String, dynamic> json) => WeatherModel(
         //coord: Coord.fromJson(json["coord"]),
-        // weather:
-        //     List<Weather>.from(json["weather"].map((x) => Weather.fromJson(x))),
+        weather:
+            List<Weather>.from(json["weather"].map((x) => Weather.fromJson(x))),
         // base: json["base"],
         main: Main.fromJson(json["main"]),
         // visibility: json["visibility"],

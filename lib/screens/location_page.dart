@@ -17,6 +17,7 @@ class LocationPage extends StatefulWidget {
 class _LocationPageState extends State<LocationPage> {
   late double temp = 0;
   late String cityName = '';
+  late String icon = '';
   @override
   void initState() {
     super.initState();
@@ -32,6 +33,7 @@ class _LocationPageState extends State<LocationPage> {
       } else {
         temp = weatherData.main.temp;
         cityName = weatherData.name;
+        icon = WeatherService().getWeatherIcon(weatherData.weather[0].id);
       }
     });
   }
@@ -97,32 +99,40 @@ class _LocationPageState extends State<LocationPage> {
                         fontSize: 80,
                         color: Colors.white,
                         letterSpacing: 0.9,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     const Text(
-                      '\u00B0',
+                      '\u1d52',
                       style: TextStyle(
                         fontSize: 50,
                         color: Colors.white,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                    ShaderMask(
-                      shaderCallback: (Rect bounds) {
-                        return const LinearGradient(
-                          colors: [
-                            Colors.white,
-                            Colors.lightBlue,
-                          ],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          stops: [0.0, 1.0],
-                        ).createShader(bounds);
-                      },
-                      child: const FaIcon(
-                        FontAwesomeIcons.cloud,
-                        size: 80,
+                    Text(
+                      icon,
+                      style: const TextStyle(
+                        fontSize: 70,
                       ),
-                    ),
+                    )
+                    // ShaderMask(
+                    //   shaderCallback: (Rect bounds) {
+                    //     return const LinearGradient(
+                    //       colors: [
+                    //         Colors.white,
+                    //         Colors.lightBlue,
+                    //       ],
+                    //       begin: Alignment.topLeft,
+                    //       end: Alignment.bottomRight,
+                    //       stops: [0.0, 1.0],
+                    //     ).createShader(bounds);
+                    //   },
+                    //   child: const FaIcon(
+                    //     FontAwesomeIcons.cloud,
+                    //     size: 80,
+                    //   ),
+                    // ),
                   ],
                 ),
                 Text(
