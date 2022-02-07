@@ -93,7 +93,6 @@ class _LocationPageState extends State<LocationPage> {
                   children: [
                     Text(
                       temp.toStringAsFixed(1),
-                      // temperature.toStringAsFixed(1),
                       style: const TextStyle(
                         fontSize: 80,
                         color: Colors.white,
@@ -103,7 +102,7 @@ class _LocationPageState extends State<LocationPage> {
                     const Text(
                       '\u00B0',
                       style: TextStyle(
-                        fontSize: 30,
+                        fontSize: 50,
                         color: Colors.white,
                       ),
                     ),

@@ -14,6 +14,7 @@ class NetworkHelper {
     if (response.statusCode == 200) {
       String data = response.body;
       var decodedData = jsonDecode(data);
+      print(decodedData);
       return decodedData;
     } else {
       throw Exception('Failed to load weather data');
