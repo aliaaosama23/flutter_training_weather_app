@@ -5,7 +5,10 @@ import 'package:weather/screens/city_page.dart';
 import 'package:weather/services/weather.dart';
 
 class LocationPage extends StatefulWidget {
-  const LocationPage({Key? key, required this.weatherData}) : super(key: key);
+  const LocationPage({
+    Key? key,
+    required this.weatherData,
+  }) : super(key: key);
 
   final WeatherModel weatherData;
 
@@ -18,9 +21,11 @@ class _LocationPageState extends State<LocationPage> {
   late String cityName = '';
   late String icon = '';
   late String description = '';
+  //late Future<WeatherModel> futureWeather;
   @override
   void initState() {
     super.initState();
+
     updateUI(widget.weatherData);
   }
 

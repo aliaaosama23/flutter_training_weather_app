@@ -6,7 +6,7 @@ const kBaseURL = 'api.openweathermap.org/data/2.5/weather';
 const kInputDecorationStyle = InputDecoration(
   border: OutlineInputBorder(
     borderRadius: BorderRadius.all(
-      Radius.circular(8),
+      Radius.circular(10.0),
     ),
     borderSide: BorderSide.none,
   ),
