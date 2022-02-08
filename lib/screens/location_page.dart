@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:weather/models/weather_model.dart';
 import 'package:weather/screens/city_page.dart';
 import 'package:weather/services/weather.dart';
@@ -18,6 +17,7 @@ class _LocationPageState extends State<LocationPage> {
   late double temp = 0;
   late String cityName = '';
   late String icon = '';
+  late String description = '';
   @override
   void initState() {
     super.initState();
@@ -31,9 +31,10 @@ class _LocationPageState extends State<LocationPage> {
         cityName = '';
         return;
       } else {
-        temp = weatherData.main.temp;
-        cityName = weatherData.name;
-        icon = WeatherService().getWeatherIcon(weatherData.weather[0].id);
+        temp = weatherData.main!.temp!;
+        cityName = weatherData.name!;
+        icon = WeatherService().getWeatherIcon(weatherData.weather![0].id);
+        description = weatherData.weather![0].description;
       }
     });
   }
@@ -65,7 +66,7 @@ class _LocationPageState extends State<LocationPage> {
                       onPressed: () async {
                         // get current waether depend on current loaction
                         WeatherService weather = WeatherService();
-                        var weatherData = await weather.getWeatherData();
+                        var weatherData = await weather.getDataByLocation();
                         updateUI(weatherData);
                       },
                       icon: const Icon(
@@ -76,13 +77,20 @@ class _LocationPageState extends State<LocationPage> {
                     ),
                     IconButton(
                       onPressed: () async {
-                        final city = await Navigator.push(
+                        final cityName = await Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => const CityPage(),
                           ),
                         );
-                        print('backed city is $city');
+                        print('backed city is $cityName');
+                        if (cityName != '') {
+                          WeatherService weather = WeatherService();
+                          print('getting weather again');
+                          var weatherData =
+                              await weather.getDataByCityName(cityName);
+                          updateUI(weatherData);
+                        }
                       },
                       icon: const Icon(
                         Icons.location_city,
@@ -137,7 +145,7 @@ class _LocationPageState extends State<LocationPage> {
                   ],
                 ),
                 Text(
-                  'Bring your jacket in case in $cityName',
+                  'it is $description  in $cityName',
                   style: const TextStyle(
                     fontSize: 55,
                     color: Colors.white,

@@ -3,21 +3,26 @@ import 'package:weather/services/location.dart';
 import 'package:weather/utilities/constants.dart';
 import 'networking.dart';
 
-const BaseUrl = 'http://api.openweathermap.org/data/2.5/weather';
+const baseUrl = 'http://api.openweathermap.org/data/2.5/weather';
 
 class WeatherService {
-  getWeatherData() async {
+  Future<WeatherModel> getDataByLocation() async {
+    // get current user location
     Location userLocation = Location();
     await userLocation.getLatLong();
 
-    var weatherData = await getData(userLocation);
-    return weatherData;
-  }
-
-  Future<WeatherModel> getData(Location userLocation) async {
-    NetworkHelper helper = NetworkHelper('$BaseUrl?lat=${userLocation.lat}'
+    // get weather data dependent on current location
+    //var weatherData = await getDataByLocation(userLocation);
+    NetworkHelper helper = NetworkHelper('$baseUrl?lat=${userLocation.lat}'
         '&lon=${userLocation.lon}'
         '&appid=$kAPIKEY&units=metric');
+    return helper.getWeatherData();
+  }
+
+  Future<WeatherModel> getDataByCityName(String cityName) async {
+    NetworkHelper helper =
+        NetworkHelper('$baseUrl?q=$cityName&appid=$kAPIKEY&units=metric');
+
     return helper.getWeatherData();
   }
 

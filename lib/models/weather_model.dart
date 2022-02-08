@@ -1,9 +1,9 @@
 class WeatherModel {
   WeatherModel({
     // //  required this.coord,
-    required this.weather,
+    this.weather,
     // required this.base,
-    required this.main,
+    this.main,
     // required this.visibility,
     // required this.wind,
     // required this.clouds,
@@ -11,14 +11,14 @@ class WeatherModel {
     //required this.sys,
     // required this.timezone,
     // required this.id,
-    required this.name,
+    this.name,
     //required this.cod,
   });
 
   // Coord coord;
-  List<Weather> weather;
+  List<Weather>? weather;
   // String base;
-  Main main;
+  Main? main;
   // int visibility;
   // Wind wind;
   // Clouds clouds;
@@ -26,7 +26,7 @@ class WeatherModel {
   //Sys sys;
   // int timezone;
   // int id;
-  String name;
+  String? name;
   //int cod;
 
   factory WeatherModel.fromJson(Map<String, dynamic> json) => WeatherModel(
@@ -76,24 +76,24 @@ class Coord {
 
 class Main {
   Main({
-    required this.temp,
-    required this.feelsLike,
-    required this.tempMin,
-    required this.tempMax,
-    required this.pressure,
-    required this.humidity,
-    required this.seaLevel,
-    required this.grndLevel,
+    this.temp,
+    this.feelsLike,
+    this.tempMin,
+    this.tempMax,
+    this.pressure,
+    this.humidity,
+    this.seaLevel,
+    this.grndLevel,
   });
 
-  double temp;
-  double feelsLike;
-  double tempMin;
-  double tempMax;
-  int pressure;
-  int humidity;
-  int seaLevel;
-  int grndLevel;
+  double? temp;
+  double? feelsLike;
+  double? tempMin;
+  double? tempMax;
+  int? pressure;
+  int? humidity;
+  int? seaLevel;
+  int? grndLevel;
 
   factory Main.fromJson(Map<String, dynamic> json) => Main(
         temp: json["temp"].toDouble(),

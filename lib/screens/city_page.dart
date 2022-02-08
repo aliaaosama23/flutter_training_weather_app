@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:weather/utilities/constants.dart';
 
-class CityPage extends StatelessWidget {
+class CityPage extends StatefulWidget {
   const CityPage({Key? key}) : super(key: key);
+
+  @override
+  State<CityPage> createState() => _CityPageState();
+}
+
+class _CityPageState extends State<CityPage> {
   @override
   Widget build(BuildContext context) {
     String cityName = '';
@@ -41,25 +48,7 @@ class CityPage extends StatelessWidget {
                     fontSize: 20,
                   ),
                   cursorColor: Colors.black,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(8),
-                      ),
-                      borderSide: BorderSide.none,
-                    ),
-                    hintText: 'Enter city name',
-                    fillColor: Colors.white,
-                    hintStyle: TextStyle(
-                      color: Colors.grey,
-                    ),
-                    filled: true,
-                    icon: Icon(
-                      Icons.location_city,
-                      color: Colors.white,
-                      size: 30,
-                    ),
-                  ),
+                  decoration: kInputDecorationStyle,
                   onChanged: (value) {
                     cityName = value;
                   },
