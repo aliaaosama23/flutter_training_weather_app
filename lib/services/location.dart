@@ -4,6 +4,7 @@ class Location {
   double lat = 0.0;
   double lon = 0.0;
 
+  // return with no data but in the future
   Future<void> getLatLong() async {
     try {
       Position userCurrentPosition = await _determinePosition();
